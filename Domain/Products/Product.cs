@@ -1,9 +1,13 @@
-﻿using Domain.Categories;
+﻿using Domain.Abstractions;
+using Domain.Categories;
 
 namespace Domain.Products;
-public sealed class Product
+public sealed class Product : Entity
 {
-    public Guid Id { get; set; }
+    public Product(Guid id) : base(id)
+    {
+    }
+
     public string Name { get; set; } = default!;
     public int Quantity { get; set; }
     public decimal Price { get; set; }
