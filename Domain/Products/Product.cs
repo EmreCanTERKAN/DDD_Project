@@ -1,17 +1,30 @@
 ﻿using Domain.Abstractions;
 using Domain.Categories;
+using Domain.Shared;
 
 namespace Domain.Products;
 public sealed class Product : Entity
 {
-    public Product(Guid id) : base(id)
+    public Product(Guid id, Name name, int quantity, Money? price, Guid categoryId, Category category) : base(id)
     {
+        Name = name;
+        Quantity = quantity;
+        Price = price;
+        CategoryId = categoryId;
+        Category = category;
     }
 
-    public string Name { get; set; } = default!;
-    public int Quantity { get; set; }
-    public decimal Price { get; set; }
-    public string Currency { get; set; } = default!;
-    public Guid CategoryId { get; set; }
-    public Category Category { get; set; } = default!;
+    public Name Name { get; private set; } = default!;
+    public int Quantity { get; private set; }
+    public Money? Price { get; private set; }
+    public Guid CategoryId { get; private set; }
+    public Category Category { get; private set; } = default!;
+
+    public void Update(string name,int quantity,decimal amount, string currency, Guid categoryId)
+    {
+        Name = new(name);
+        Quantity = quantity;
+        Price = new(amount, Currency.FromCode(currency));
+        CategoryId = categoryId;
+    }
 }
