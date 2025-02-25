@@ -14,7 +14,7 @@ public sealed class Order : Entity
     public string OrderNumber { get; private set; } = default!;
     public DateTime CreatedDate { get; private set; } = default!;
     public OrderStatusEnum Status { get; private set; } = default!;
-    public ICollection<OrderLine> OrderLines { get; private set; } = default!;
+    public ICollection<OrderLine> OrderLines { get; private set; } = new List<OrderLine>();
 
     public void CreateOrder(List<CreateOrderDto> createOrderDtos)
     {
