@@ -4,7 +4,7 @@ public sealed record Money(decimal Amount, Currency Currency)
     public static Money operator +(Money a, Money b)
     {
         if (a.Currency != b.Currency)
-            throw new ArgumentException("Para birimleri birbirinden farklı değerler toplanamaz");
+            throw new ArgumentException("Para birimleri birbirinden farklı değerler. toplanamaz");
         return new(a.Amount + b.Amount, a.Currency);
     }
 
