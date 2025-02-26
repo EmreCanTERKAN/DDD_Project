@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Domain.Abstractions;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace Application;
@@ -8,7 +9,7 @@ public static class ApplicationRegistrar
     {
         services.AddMediatR(cfg =>
         {
-            cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly(),typeof(Entity).Assembly);
         });
         return services;
     }

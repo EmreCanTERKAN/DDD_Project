@@ -22,6 +22,9 @@ internal sealed class OrderRepository(ApplicationDbContext dbContext) : IOrderRe
 
     public async Task<List<Order>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        return await dbContext.Orders.ToListAsync(cancellationToken);
+        return await dbContext.Orders
+            .Include(p => p.OrderLines)
+            .ThenInclude(p => p.Product)
+            .ToListAsync(cancellationToken);
     }
 }

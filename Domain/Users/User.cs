@@ -4,6 +4,9 @@ using Domain.Shared;
 namespace Domain.Users;
 public sealed class User : Entity
 {
+    private User(Guid id) : base(id)
+    {
+    }
     private User(Guid id, Name name, Email email, Password password, Address? address) : base(id)
     {
         Name = name;
@@ -12,13 +15,14 @@ public sealed class User : Entity
         Address = address;
     }
 
-    public Name Name { get; private set; }
-    public Email Email { get; private set; }
-    public Password Password { get; private set; }
+    public Name Name { get; private set; } = default!;
+    public Email Email { get; private set; } = default!;
+    public Password Password { get; private set; } = default!;
     public Address? Address { get; private set; }
 
     public static User CreateUser(string name, string email, string password, string country, string city, string street, string postalCode, string fullAddress)
     {
+        //İş kuralları
         User user = new(
             id: Guid.NewGuid(),
             name: new(name),

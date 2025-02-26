@@ -23,9 +23,11 @@ internal sealed class ApplicationDbContext : DbContext, IUnitOfWork
         modelBuilder.Entity<User>()
             .Property(p => p.Name)
             .HasConversion(name => name.Value, value => new(value));
+
         modelBuilder.Entity<User>()
             .Property(p => p.Email)
             .HasConversion(email => email.Value, value => new(value));
+
         modelBuilder.Entity<User>()
             .Property(p => p.Password)
             .HasConversion(password => password.Value, value => new(value));
